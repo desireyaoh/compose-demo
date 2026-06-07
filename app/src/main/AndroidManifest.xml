@@ -30,10 +30,36 @@
             android:theme="@style/Theme.Composedemo"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".DemoActivity2"
+            android:exported="false"
+            android:label="布局与基本组件示例"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
+            android:name=".DemoActivity3"
+            android:exported="false"
+            android:label="状态管理示例"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
+            android:name=".DemoActivity4"
+            android:exported="false"
+            android:label="ViewModel 示例"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
+            android:name=".DemoActivity5"
+            android:exported="false"
+            android:label="协程示例"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.Composedemo" />
+        <activity
+            android:name=".mine.TestActivity1"
+            android:exported="false"
+            android:label="@string/title_activity_test1"
+            android:theme="@style/Theme.Composedemo"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

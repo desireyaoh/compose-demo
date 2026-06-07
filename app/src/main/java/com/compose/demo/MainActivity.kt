@@ -1,18 +1,25 @@
 package com.compose.demo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.Contacts
 import androidx.compose.material.icons.outlined.Explore
+import androidx.compose.material.icons.automirrored.outlined.ListAlt
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -27,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import com.compose.demo.ui.theme.ComposedemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,13 +53,15 @@ private data class TabItem(val title: String, val icon: ImageVector)
 
 private val WeChatGreen = Color(0xFF07C160)
 
+
 @Composable
 fun MainScreen() {
     val tabs = listOf(
         TabItem("聊天", Icons.Outlined.ChatBubbleOutline),
         TabItem("通讯录", Icons.Outlined.Contacts),
         TabItem("发现", Icons.Outlined.Explore),
-        TabItem("我", Icons.Outlined.Person)
+        TabItem("我", Icons.Outlined.Person),
+        TabItem("示例", Icons.AutoMirrored.Outlined.ListAlt)
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
 
@@ -82,10 +92,40 @@ fun MainScreen() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
+                .padding(innerPadding)
         ) {
-            Text(text = tabs[selectedIndex].title)
+            when (selectedIndex) {
+                0 -> ConversationScreen()
+                1 -> ContactsScreen()
+                4 -> DemoListScreen()
+                else -> Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = tabs[selectedIndex].title)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DemoListScreen() {
+    val context = LocalContext.current
+    val items = listOf("跳转到 DemoActivity1", "功能示例 2", "功能示例 3")
+
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        itemsIndexed(items) { index, item ->
+            ListItem(
+                headlineContent = { Text(text = item) },
+                modifier = Modifier.clickable {
+                    if (index == 0) {
+                        val intent = Intent(context, DemoActivity1::class.java)
+                        context.startActivity(intent)
+                    }
+                }
+            )
+            HorizontalDivider(color = Color.LightGray.copy(alpha = 0.5f))
         }
     }
 }

@@ -29,6 +29,11 @@
             android:label="@string/title_activity_demo1"
             android:theme="@style/Theme.Composedemo"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.Composedemo" />
     </application>
 
 </manifest>

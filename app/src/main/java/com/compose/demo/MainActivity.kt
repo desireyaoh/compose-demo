@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.Contacts
-import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.automirrored.outlined.ListAlt
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.HorizontalDivider
@@ -57,11 +56,10 @@ private val WeChatGreen = Color(0xFF07C160)
 @Composable
 fun MainScreen() {
     val tabs = listOf(
+        TabItem("示例", Icons.AutoMirrored.Outlined.ListAlt),
         TabItem("聊天", Icons.Outlined.ChatBubbleOutline),
         TabItem("通讯录", Icons.Outlined.Contacts),
-        TabItem("发现", Icons.Outlined.Explore),
-        TabItem("我", Icons.Outlined.Person),
-        TabItem("示例", Icons.AutoMirrored.Outlined.ListAlt)
+        TabItem("我", Icons.Outlined.Person)
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
 
@@ -95,9 +93,9 @@ fun MainScreen() {
                 .padding(innerPadding)
         ) {
             when (selectedIndex) {
-                0 -> ConversationScreen()
-                1 -> ContactsScreen()
-                4 -> DemoListScreen()
+                0 -> DemoListScreen()
+                1 -> ConversationScreen()
+                2 -> ContactsScreen()
                 else -> Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -112,16 +110,20 @@ fun MainScreen() {
 @Composable
 fun DemoListScreen() {
     val context = LocalContext.current
-    val items = listOf("跳转到 DemoActivity1", "功能示例 2", "功能示例 3")
+    val items = listOf(
+        "跳转到 DemoActivity1",
+        "跳转到 SettingsActivity",
+        "功能示例 3"
+    )
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         itemsIndexed(items) { index, item ->
             ListItem(
                 headlineContent = { Text(text = item) },
                 modifier = Modifier.clickable {
-                    if (index == 0) {
-                        val intent = Intent(context, DemoActivity1::class.java)
-                        context.startActivity(intent)
+                    when (index) {
+                        0 -> context.startActivity(Intent(context, DemoActivity1::class.java))
+                        1 -> context.startActivity(Intent(context, SettingsActivity::class.java))
                     }
                 }
             )

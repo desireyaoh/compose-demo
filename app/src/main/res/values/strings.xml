@@ -12,4 +12,20 @@
     <string name="settings_about">关于应用</string>
     <string name="cd_back">返回</string>
     <string name="title_activity_test1">TestActivity1</string>
+    <string name="user_info_button_default">快点我</string>
+    <string name="user_info_button_clicked">点了</string>
+    <string name="title_activity_weather_info">天气详情</string>
+    <string name="weather_feels_like">Feels Like</string>
+    <string name="weather_wind_speed">Wind Speed</string>
+    <string name="weather_humidity">Humidity</string>
+    <string name="weather_precipitation">Precipitation</string>
+    <string name="weather_sunrise">Sunrise</string>
+    <string name="weather_sunset">Sunset</string>
+    <string name="weather_wind_direction">ESE</string>
+    <string name="weather_value_feels_like">72°</string>
+    <string name="weather_value_wind_speed">12 km/h</string>
+    <string name="weather_value_humidity">65%</string>
+    <string name="weather_value_precipitation">60%</string>
+    <string name="weather_value_sunrise">06:18</string>
+    <string name="weather_value_sunset">18:27</string>
 </resources>

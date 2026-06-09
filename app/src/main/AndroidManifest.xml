@@ -50,9 +50,19 @@
             android:label="协程示例"
             android:theme="@style/Theme.Composedemo" />
         <activity
+            android:name=".DemoActivity6"
+            android:exported="false"
+            android:label="Pager 示例"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.Composedemo" />
+        <activity
+            android:name=".mine.WeatherInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_weather_info"
             android:theme="@style/Theme.Composedemo" />
         <activity
             android:name=".mine.TestActivity1"

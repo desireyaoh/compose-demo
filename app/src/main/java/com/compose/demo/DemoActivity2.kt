@@ -48,9 +48,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.compose.demo.ui.theme.ComposedemoTheme
 
+/**
+ * Compose 布局容器 & 基础组件演示页面。
+ *
+ * 演示内容分为两大节：
+ *  1. 基础布局容器：Column（垂直）、Row（水平）、Box（层叠）
+ *  2. 常见基本组件：TextField、Button、Checkbox、Switch、Slider、信息卡片
+ *
+ * 整体内容通过 verticalScroll 实现可滚动，适合内容超出屏幕高度的演示场景。
+ */
 class DemoActivity2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // enableEdgeToEdge 让内容延伸到系统栏区域，配合 safeContentPadding 避免内容被遮挡
         enableEdgeToEdge()
         setContent {
             ComposedemoTheme {
@@ -67,19 +77,23 @@ class DemoActivity2 : ComponentActivity() {
     }
 }
 
+/**
+ * 布局与组件演示的顶层 Composable。
+ *
+ * 使用 Column + verticalScroll 实现可滚动列表，避免内容过多时超出屏幕。
+ */
 @Composable
 fun LayoutsAndComponentsDemo() {
-    // 使用 Column + verticalScroll 实现可滚动的垂直布局
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        // --- 1. 基础布局容器 ---
+        // ==================== 第一节：基础布局容器 ====================
         SectionTitle("1. 基础布局容器 (Layouts)")
 
-        // Column: 垂直排列
+        // Column：子元素沿垂直方向依次排列，等同于线性布局 vertical
         Text("Column (垂直排列):")
         Column(
             modifier = Modifier
@@ -94,7 +108,7 @@ fun LayoutsAndComponentsDemo() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Row: 水平排列
+        // Row：子元素沿水平方向排列，SpaceBetween 使首尾元素贴边、中间均匀分布
         Text("Row (水平排列):")
         Row(
             modifier = Modifier
@@ -111,7 +125,7 @@ fun LayoutsAndComponentsDemo() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Box: 层叠排列 (类似 FrameLayout)
+        // Box：子元素层叠排列（类似 FrameLayout），通过 align 控制各子元素在容器内的位置
         Text("Box (层叠排列):")
         Box(
             modifier = Modifier
@@ -119,6 +133,7 @@ fun LayoutsAndComponentsDemo() {
                 .clip(RoundedCornerShape(8.dp))
                 .background(MaterialTheme.colorScheme.primaryContainer)
         ) {
+            // 三个子元素分别位于左上、中央、右下，演示 Box 的层叠对齐能力
             Text("底层", modifier = Modifier.align(Alignment.TopStart).padding(4.dp))
             CircularProgressIndicator(
                 modifier = Modifier.size(40.dp).align(Alignment.Center),
@@ -127,12 +142,13 @@ fun LayoutsAndComponentsDemo() {
             Text("顶层", modifier = Modifier.align(Alignment.BottomEnd).padding(4.dp))
         }
 
+        // 分节分隔线
         HorizontalDivider(modifier = Modifier.padding(vertical = 24.dp))
 
-        // --- 2. 常见基本组件 ---
+        // ==================== 第二节：基本组件 ====================
         SectionTitle("2. 基本组件 (Components)")
 
-        // 输入框
+        // OutlinedTextField：带边框的输入框，value + onValueChange 是 Compose 单向数据流的标准用法
         var textValue by remember { mutableStateOf("") }
         OutlinedTextField(
             value = textValue,
@@ -143,7 +159,7 @@ fun LayoutsAndComponentsDemo() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 按钮
+        // Button：内部使用 Row 排列图标和文字，onClick 留空仅作 UI 演示
         Row {
             Button(onClick = { }) {
                 Icon(Icons.Default.Favorite, contentDescription = null)
@@ -154,7 +170,7 @@ fun LayoutsAndComponentsDemo() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 选择器组件
+        // Checkbox 和 Switch：两者均为受控组件，状态由 remember 持有，变化时通过回调更新
         Row(verticalAlignment = Alignment.CenterVertically) {
             var checked by remember { mutableStateOf(true) }
             Checkbox(checked = checked, onCheckedChange = { checked = it })
@@ -169,14 +185,14 @@ fun LayoutsAndComponentsDemo() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 滑动条
+        // Slider：浮点值范围默认 0f~1f，mutableFloatStateOf 是专用于 Float 的状态持有，性能优于 mutableStateOf<Float>
         Text("滑动条 (Slider):")
         var sliderValue by remember { mutableFloatStateOf(0.5f) }
         Slider(value = sliderValue, onValueChange = { sliderValue = it })
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 包含交互的小示例
+        // 信息卡片：Box + Row 组合，演示容器嵌套与 secondaryContainer 色彩的实际效果
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -196,6 +212,11 @@ fun LayoutsAndComponentsDemo() {
     }
 }
 
+/**
+ * 章节标题组件，统一各演示节的视觉样式。
+ *
+ * 抽取为私有函数避免重复代码，仅供当前文件内使用。
+ */
 @Composable
 private fun SectionTitle(title: String) {
     Text(

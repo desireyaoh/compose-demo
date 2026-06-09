@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import com.compose.demo.ui.theme.ComposedemoTheme
 import com.compose.demo.mine.TestActivity1
+import com.compose.demo.mine.WeatherInfoActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,8 +120,10 @@ fun DemoListScreen() {
         "跳转到 DemoActivity3 (状态管理详解)",
         "跳转到 DemoActivity4 (ViewModel 结合)",
         "跳转到 DemoActivity5 (协程示例)",
+        "跳转到 DemoActivity6 (Pager 示例)",
         "跳转到 TestActivity1",
-        "跳转到 SettingsActivity"
+        "跳转到 SettingsActivity",
+        "跳转到 WeatherInfoActivity (天气详情)"
     )
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -134,8 +137,10 @@ fun DemoListScreen() {
                         2 -> context.startActivity(Intent(context, DemoActivity3::class.java))
                         3 -> context.startActivity(Intent(context, DemoActivity4::class.java))
                         4 -> context.startActivity(Intent(context, DemoActivity5::class.java))
-                        5 -> context.startActivity(Intent(context, TestActivity1::class.java))
-                        6 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                        5 -> context.startActivity(Intent(context, DemoActivity6::class.java))
+                        6 -> context.startActivity(Intent(context, TestActivity1::class.java))
+                        7 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                        8 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
                     }
                 }
             )

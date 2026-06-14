@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
@@ -30,7 +31,9 @@ import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose.demo.R
@@ -52,6 +56,12 @@ import com.compose.demo.ui.theme.WeatherLabelColor
 import com.compose.demo.ui.theme.WeatherPageBg
 import com.compose.demo.ui.theme.WeatherValueColor
 
+private enum class CardType {
+    Standard,
+    Elevated,
+    Outlined
+}
+
 /**
  * 天气详情卡片数据模型。
  *
@@ -61,7 +71,8 @@ private data class WeatherItem(
     val icon: ImageVector,
     val label: String,
     val value: String,
-    val subtitle: String = ""
+    val subtitle: String = "",
+    val cardType: CardType = CardType.Standard
 )
 
 /**
@@ -96,33 +107,39 @@ fun WeatherInfoScreen() {
         WeatherItem(
             icon = Icons.Filled.Thermostat,
             label = stringResource(R.string.weather_feels_like),
-            value = stringResource(R.string.weather_value_feels_like)
+            value = stringResource(R.string.weather_value_feels_like),
+            cardType = CardType.Standard
         ),
         WeatherItem(
             icon = Icons.Filled.Air,
             label = stringResource(R.string.weather_wind_speed),
             value = stringResource(R.string.weather_value_wind_speed),
-            subtitle = stringResource(R.string.weather_wind_direction)
+            subtitle = stringResource(R.string.weather_wind_direction),
+            cardType = CardType.Elevated
         ),
         WeatherItem(
             icon = Icons.Filled.WaterDrop,
             label = stringResource(R.string.weather_humidity),
-            value = stringResource(R.string.weather_value_humidity)
+            value = stringResource(R.string.weather_value_humidity),
+            cardType = CardType.Outlined
         ),
         WeatherItem(
             icon = Icons.Filled.Umbrella,
             label = stringResource(R.string.weather_precipitation),
-            value = stringResource(R.string.weather_value_precipitation)
+            value = stringResource(R.string.weather_value_precipitation),
+            cardType = CardType.Standard
         ),
         WeatherItem(
             icon = Icons.Filled.WbSunny,
             label = stringResource(R.string.weather_sunrise),
-            value = stringResource(R.string.weather_value_sunrise)
+            value = stringResource(R.string.weather_value_sunrise),
+            cardType = CardType.Elevated
         ),
         WeatherItem(
             icon = Icons.Filled.WbTwilight,
             label = stringResource(R.string.weather_sunset),
-            value = stringResource(R.string.weather_value_sunset)
+            value = stringResource(R.string.weather_value_sunset),
+            cardType = CardType.Outlined
         )
     )
 
@@ -143,55 +160,105 @@ fun WeatherInfoScreen() {
 
 @Composable
 private fun WeatherInfoCard(item: WeatherItem) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // 圆形浅蓝色图标背景，与图标颜色形成对比
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(CircleShape)
-                    .background(WeatherIconBg),
-                contentAlignment = Alignment.Center
+    val cardModifier = Modifier.fillMaxWidth().height(140.dp)
+    val cardShape = RoundedCornerShape(22.dp)
+
+    when (item.cardType) {
+        CardType.Standard -> {
+            Card(
+                modifier = cardModifier,
+                shape = cardShape,
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
-                Icon(
-                    imageVector = item.icon,
-                    contentDescription = item.label,
-                    tint = WeatherIconTint,
-                    modifier = Modifier.size(26.dp)
-                )
+                WeatherCardContent(item)
             }
+        }
+        CardType.Elevated -> {
+            ElevatedCard(
+                modifier = cardModifier,
+                shape = cardShape,
+                colors = CardDefaults.elevatedCardColors(containerColor = Color.White),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
+            ) {
+                WeatherCardContent(item)
+            }
+        }
+        CardType.Outlined -> {
+            OutlinedCard(
+                modifier = cardModifier,
+                shape = cardShape,
+                colors = CardDefaults.outlinedCardColors(containerColor = Color.White),
+                elevation = CardDefaults.outlinedCardElevation(defaultElevation = 0.dp)
+            ) {
+                WeatherCardContent(item)
+            }
+        }
+    }
+}
 
-            Spacer(modifier = Modifier.width(12.dp))
+@Composable
+private fun WeatherCardContent(item: WeatherItem) {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        // 圆形浅蓝色图标背景，与图标颜色形成对比
+        Box(
+            modifier = Modifier
+                .size(42.dp)
+                .clip(CircleShape)
+                .background(WeatherIconBg),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = item.icon,
+                contentDescription = item.label,
+                tint = WeatherIconTint,
+                modifier = Modifier.size(26.dp)
+            )
+        }
 
-            Column {
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Column {
+            Text(
+                text = item.label,
+                color = WeatherLabelColor,
+                fontSize = 13.sp
+            )
+            Text(
+                text = item.value,
+                color = WeatherValueColor,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+            // 副标题仅在有内容时渲染（当前仅"风向"使用）
+            if (item.subtitle.isNotEmpty()) {
                 Text(
-                    text = item.label,
+                    text = item.subtitle,
                     color = WeatherLabelColor,
-                    fontSize = 13.sp
+                    fontSize = 12.sp
                 )
-                Text(
-                    text = item.value,
-                    color = WeatherValueColor,
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                // 副标题仅在有内容时渲染（当前仅"风向"使用）
-                if (item.subtitle.isNotEmpty()) {
-                    Text(
-                        text = item.subtitle,
-                        color = WeatherLabelColor,
-                        fontSize = 12.sp
-                    )
-                }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun WeatherInfoScreenPreview() {
+    ComposedemoTheme {
+        Box(
+            modifier = Modifier
+                .background(Purple80)
+                .fillMaxSize()
+                .safeContentPadding()
+        ) {
+            WeatherInfoScreen()
         }
     }
 }

@@ -36,7 +36,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import com.compose.demo.ui.theme.ComposedemoTheme
+import com.compose.demo.mine.TestActivity0
 import com.compose.demo.mine.TestActivity1
+import com.compose.demo.mine.TestActivity2
 import com.compose.demo.mine.WeatherInfoActivity
 
 class MainActivity : ComponentActivity() {
@@ -121,9 +123,11 @@ fun DemoListScreen() {
         "跳转到 DemoActivity4 (ViewModel 结合)",
         "跳转到 DemoActivity5 (协程示例)",
         "跳转到 DemoActivity6 (Pager 示例)",
-        "跳转到 TestActivity1",
         "跳转到 SettingsActivity",
-        "跳转到 WeatherInfoActivity (天气详情)"
+        "跳转到 WeatherInfoActivity (天气详情)",
+        "跳转到 TestActivity0",
+        "跳转到 TestActivity1",
+        "跳转到 TestActivity2",
     )
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -138,9 +142,11 @@ fun DemoListScreen() {
                         3 -> context.startActivity(Intent(context, DemoActivity4::class.java))
                         4 -> context.startActivity(Intent(context, DemoActivity5::class.java))
                         5 -> context.startActivity(Intent(context, DemoActivity6::class.java))
-                        6 -> context.startActivity(Intent(context, TestActivity1::class.java))
-                        7 -> context.startActivity(Intent(context, SettingsActivity::class.java))
-                        8 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
+                        6 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                        7 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
+                        8 -> context.startActivity(Intent(context, TestActivity0::class.java))
+                        9 -> context.startActivity(Intent(context, TestActivity1::class.java))
+                        10 -> context.startActivity(Intent(context, TestActivity2::class.java))
                     }
                 }
             )

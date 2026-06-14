@@ -28,4 +28,7 @@
     <string name="weather_value_precipitation">60%</string>
     <string name="weather_value_sunrise">06:18</string>
     <string name="weather_value_sunset">18:27</string>
+    <string name="title_activity_test0">TestActivity0</string>
+    <string name="title_activity_test2">Pager 示例</string>
+    <string name="title_activity_test3">对齐约束演示</string>
 </resources>

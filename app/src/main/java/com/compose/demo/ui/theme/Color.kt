@@ -23,3 +23,16 @@ val SettingsTitleText = Color(0xFF222222)
 val SettingsItemText = Color(0xFF2F2F2F)
 val SettingsCardBg = Color(0xFFFFFFFF)
 val SettingsDivider = Color(0xFFEEEEEE)
+
+val TextGreen = Color(0xFF4CAF50)
+
+// 对齐约束演示页色板
+val DemoRed = Color(0xFFEF5350)
+val DemoBlue = Color(0xFF42A5F5)
+val DemoGreen = Color(0xFF66BB6A)
+val DemoOrange = Color(0xFFFFA726)
+val DemoPurple = Color(0xFFAB47BC)
+val DemoCyan = Color(0xFF26C6DA)
+val DemoIndigo = Color(0xFF5C6BC0)
+val DemoLightBlue = Color(0xFFE3F2FD)
+val DemoContainerGray = Color(0xFFE0E0E0)

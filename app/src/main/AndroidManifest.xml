@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Composedemo">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Composedemo"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,49 +27,57 @@
             android:name=".DemoActivity1"
             android:exported="false"
             android:label="@string/title_activity_demo1"
-            android:theme="@style/Theme.Composedemo"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".DemoActivity2"
             android:exported="false"
-            android:label="布局与基本组件示例"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="布局与基本组件示例" />
         <activity
             android:name=".DemoActivity3"
             android:exported="false"
-            android:label="状态管理示例"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="状态管理示例" />
         <activity
             android:name=".DemoActivity4"
             android:exported="false"
-            android:label="ViewModel 示例"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="ViewModel 示例" />
         <activity
             android:name=".DemoActivity5"
             android:exported="false"
-            android:label="协程示例"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="协程示例" />
         <activity
             android:name=".DemoActivity6"
             android:exported="false"
-            android:label="Pager 示例"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="Pager 示例" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".mine.WeatherInfoActivity"
             android:exported="false"
-            android:label="@string/title_activity_weather_info"
-            android:theme="@style/Theme.Composedemo" />
+            android:label="@string/title_activity_weather_info" />
         <activity
             android:name=".mine.TestActivity1"
             android:exported="false"
             android:label="@string/title_activity_test1"
-            android:theme="@style/Theme.Composedemo"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".mine.TestActivity0"
+            android:exported="false"
+            android:label="@string/title_activity_test0" />
+
+        <activity
+            android:name=".mine.TestActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_test2" />
+
+        <activity
+            android:name=".mine.TestActivity3"
+            android:exported="false"
+            android:label="@string/title_activity_test3" />
+
     </application>
+
 
 </manifest>

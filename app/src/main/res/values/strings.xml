@@ -68,4 +68,23 @@
     <string name="anim_s5_title">5. InfiniteTransition — 无限循环动画</string>
     <string name="anim_s5_start">开始动画</string>
     <string name="anim_s5_stop">停止动画</string>
+
+    <!-- State Hoisting 演示 -->
+    <string name="title_activity_test5">State Hoisting 演示</string>
+    <!-- Section 1 -->
+    <string name="sh_s1_title">1. 基础：单父→子传值</string>
+    <string name="sh_s1_parent_label">父组件状态：%s</string>
+    <string name="sh_s1_input_label">子组件输入框</string>
+    <!-- Section 2 -->
+    <string name="sh_s2_title">2. 进阶：兄弟共享（Slider ↔ 色块联动）</string>
+    <string name="sh_s2_hint">拖动 Slider，两个兄弟组件从同一父状态读取并同步更新</string>
+    <!-- Section 3 -->
+    <string name="sh_s3_title">3. 高阶：三层嵌套（祖→父→孙）</string>
+    <string name="sh_s3_preview_label">顶部预览（祖父层持有状态）</string>
+    <string name="sh_s3_section_label">父层 → 点击色块触发事件冒泡至祖父</string>
+    <!-- Section 4 -->
+    <string name="sh_s4_title">4. 实战：购物车（ViewModel）</string>
+    <string name="sh_s4_total_fmt">总计 %d 件</string>
+    <string name="sh_s4_increment">增加数量</string>
+    <string name="sh_s4_decrement">减少数量</string>
 </resources>

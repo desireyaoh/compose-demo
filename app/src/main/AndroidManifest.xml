@@ -77,6 +77,17 @@
             android:exported="false"
             android:label="@string/title_activity_test3" />
 
+        <activity
+            android:name=".mine.TestActivity4"
+            android:exported="false"
+            android:label="@string/title_activity_test4" />
+
+        <activity
+            android:name=".mine.TestActivity5"
+            android:exported="false"
+            android:label="@string/title_activity_test5"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 

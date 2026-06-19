@@ -31,4 +31,20 @@
     <string name="title_activity_test0">TestActivity0</string>
     <string name="title_activity_test2">Pager 示例</string>
     <string name="title_activity_test3">对齐约束演示</string>
+    <string name="ad_media_label">原生广告</string>
+    <string name="ad_title">广告文案广告文案广告文案广告</string>
+    <string name="ad_content">广告内容广告内容广告内容广告内容广告</string>
+    <string name="ad_button">广告按钮</string>
+
+    <!-- CompositionLocal 示例 -->
+    <string name="cl_screen_title">CompositionLocal 示例</string>
+    <string name="cl_level_vip">VIP 会员</string>
+    <string name="cl_level_admin">超级管理员</string>
+    <string name="cl_nested_label">—— 嵌套覆盖（Nested Provider）——</string>
+    <string name="cl_user_level_label">用户等级：%s</string>
+    <string name="cl_padding_label">内边距：%ddp</string>
+    <string name="cl_builtin_title">内置 CompositionLocal</string>
+    <string name="cl_context_label">LocalContext：%s</string>
+    <string name="cl_toast_msg">通过 LocalContext 弹出 Toast</string>
+    <string name="cl_toast_btn">点击弹出 Toast</string>
 </resources>

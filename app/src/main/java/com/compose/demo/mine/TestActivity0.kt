@@ -1,124 +1,148 @@
 package com.compose.demo.mine
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.compose.demo.R
 import com.compose.demo.ui.theme.ComposedemoTheme
-import kotlinx.coroutines.launch
 
+// 1. compositionLocalOf：值变化时只重组读取该值的 Composable（精准重组）
+val LocalUserLevel = compositionLocalOf { "普通用户" }
+
+// 2. staticCompositionLocalOf：值变化时整个提供树全量重组，适合极少变化的配置
+val LocalCardPadding = staticCompositionLocalOf<Dp> { 16.dp }
+
+/**
+ * 演示 CompositionLocal
+ */
 class TestActivity0 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ComposedemoTheme {
-                MyScaffoldScreen()
+                CompositionLocalDemo()
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyScaffoldScreen() {
-    // 1. 初始化 SnackbarState 和协程作用域（用于显示 Snackbar）
-    val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-    var clickCount by remember { mutableIntStateOf(0) }
-
-    Scaffold(
-        // 2. 绑定 SnackbarHost
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-        
-        // 3. 顶部应用栏
-        topBar = {
-            TopAppBar(
-                title = { Text("Scaffold 示例") },
-                navigationIcon = {
-                    IconButton(onClick = { /* 打开抽屉等 */ }) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menu")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            )
-        },
-
-        // 4. 底部导航栏
-        bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    selected = true,
-                    onClick = { /* 导航到主页 */ },
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                    label = { Text("首页") }
-                )
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { /* 导航到收藏 */ },
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("收藏") }
-                )
-            }
-        },
-
-        // 5. 悬浮按钮 (FloatingActionButton)
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    clickCount++
-                    // 触发 Snackbar 弹窗
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            message = "点击了 FAB 按钮！当前次数: $clickCount",
-                            actionLabel = "确定",
-                            duration = SnackbarDuration.Short
-                        )
-                    }
-                }
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
-            }
-        },
-        
-        // 6. FAB 放置位置（默认在右下角，也可以放在中间）
-        floatingActionButtonPosition = FabPosition.End
-    ) { innerPadding ->
-        // 7. 页面主体内容：必须应用 innerPadding 避免内容被遮挡
-        Box(
+fun CompositionLocalDemo() {
+    // 3. CompositionLocalProvider 向子树注入值，覆盖默认值
+    CompositionLocalProvider(
+        LocalUserLevel provides stringResource(R.string.cl_level_vip),
+        LocalCardPadding provides 20.dp
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding), // 关键步骤！
-            contentAlignment = Alignment.Center
+                .statusBarsPadding()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "这是页面的主体内容，已经被 innerPadding 自动修正了位置。",
-                style = MaterialTheme.typography.bodyLarge
+                text = stringResource(R.string.cl_screen_title),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
             )
+
+            // 消费外层 Provider 提供的值
+            UserLevelCard()
+
+            Text(
+                text = stringResource(R.string.cl_nested_label),
+                fontWeight = FontWeight.Medium
+            )
+
+            // 4. 嵌套 Provider：仅在此子树内覆盖 LocalUserLevel
+            CompositionLocalProvider(LocalUserLevel provides stringResource(R.string.cl_level_admin)) {
+                UserLevelCard()
+            }
+
+            // 5. 内置 CompositionLocal 演示
+            BuiltInLocalsDemo()
+        }
+    }
+}
+
+@Composable
+fun UserLevelCard() {
+    // 读取最近 Provider 提供的值；若无 Provider 则使用 compositionLocalOf 的默认值
+    val userLevel = LocalUserLevel.current
+    val padding = LocalCardPadding.current
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        Column(modifier = Modifier.padding(padding)) {
+            Text(
+                text = stringResource(R.string.cl_user_level_label, userLevel),
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = stringResource(R.string.cl_padding_label, padding.value.toInt()),
+                fontSize = 12.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun BuiltInLocalsDemo() {
+    // LocalContext 是 Compose 内置的 CompositionLocal，提供当前 Android Context
+    val context = LocalContext.current
+
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = stringResource(R.string.cl_builtin_title),
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = stringResource(R.string.cl_context_label, context.javaClass.simpleName))
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = {
+                Toast.makeText(context, context.getString(R.string.cl_toast_msg), Toast.LENGTH_SHORT).show()
+            }) {
+                Text(stringResource(R.string.cl_toast_btn))
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MyScaffoldScreenPreview() {
+fun CompositionLocalDemoPreview() {
     ComposedemoTheme {
-        MyScaffoldScreen()
+        CompositionLocalDemo()
     }
 }

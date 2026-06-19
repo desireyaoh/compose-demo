@@ -218,8 +218,8 @@ fun ThemePickerScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ThemeSection(selectedColor: Color, onColorChange: (Color) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+fun ThemeSection(selectedColor: Color, onColorChange: (Color) -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
             text = stringResource(R.string.sh_s3_section_label),
             fontSize = 12.sp,
@@ -230,8 +230,8 @@ fun ThemeSection(selectedColor: Color, onColorChange: (Color) -> Unit) {
 }
 
 @Composable
-fun ColorOptionRow(selectedColor: Color, onColorChange: (Color) -> Unit) {
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+fun ColorOptionRow(selectedColor: Color, onColorChange: (Color) -> Unit, modifier: Modifier = Modifier) {
+    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         themeColors.forEach { color ->
             val isSelected = color == selectedColor
             Box(

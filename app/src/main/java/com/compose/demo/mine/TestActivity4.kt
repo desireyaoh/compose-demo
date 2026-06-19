@@ -183,7 +183,7 @@ private fun AnimateFloatDemo() {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "alpha = ${"%.2f".format(alpha)}",
+                text = String.format(stringResource(R.string.anim_s2_alpha_fmt), alpha),
                 color = MaterialTheme.colorScheme.onSecondary,
                 fontWeight = FontWeight.Bold
             )
@@ -218,7 +218,7 @@ private fun AnimateDpDemo() {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "${width.value.toInt()}dp",
+                text = String.format(stringResource(R.string.anim_s3_width_fmt), width.value.toInt()),
                 color = MaterialTheme.colorScheme.onTertiary,
                 fontWeight = FontWeight.Bold
             )

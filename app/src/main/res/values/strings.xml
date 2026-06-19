@@ -55,9 +55,11 @@
     <string name="anim_s1_hide">隐藏</string>
     <string name="anim_s2_title">2. animateFloatAsState — 透明度动画</string>
     <string name="anim_s2_toggle">切换透明度</string>
+    <string name="anim_s2_alpha_fmt">alpha = %.2f</string>
     <string name="anim_s3_title">3. animateDpAsState — 尺寸动画</string>
     <string name="anim_s3_expand">展开</string>
     <string name="anim_s3_collapse">收起</string>
+    <string name="anim_s3_width_fmt">%ddp</string>
     <string name="anim_s4_title">4. AnimatedContent — 内容切换动画</string>
     <string name="anim_s4_next">下一条</string>
     <string name="anim_s4_text_0">第一段：山高云淡，望断南飞雁</string>

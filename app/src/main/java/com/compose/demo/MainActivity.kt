@@ -27,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,10 +34,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import com.compose.demo.demo.ContactsScreen
+import com.compose.demo.demo.ConversationScreen
+import com.compose.demo.demo.DemoActivity1
+import com.compose.demo.demo.DemoActivity2
+import com.compose.demo.demo.DemoActivity3
+import com.compose.demo.demo.DemoActivity4
+import com.compose.demo.demo.DemoActivity5
+import com.compose.demo.demo.DemoActivity6
 import com.compose.demo.ui.theme.ComposedemoTheme
 import com.compose.demo.mine.TestActivity0
 import com.compose.demo.mine.TestActivity1
 import com.compose.demo.mine.TestActivity2
+import com.compose.demo.mine.TestActivity3
+import com.compose.demo.mine.TestActivity4
+import com.compose.demo.mine.TestActivity5
 import com.compose.demo.mine.WeatherInfoActivity
 
 class MainActivity : ComponentActivity() {
@@ -128,6 +138,9 @@ fun DemoListScreen() {
         "跳转到 TestActivity0",
         "跳转到 TestActivity1",
         "跳转到 TestActivity2",
+        "跳转到 TestActivity3",
+        "跳转到 TestActivity4",
+        "跳转到 TestActivity5",
     )
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -147,6 +160,9 @@ fun DemoListScreen() {
                         8 -> context.startActivity(Intent(context, TestActivity0::class.java))
                         9 -> context.startActivity(Intent(context, TestActivity1::class.java))
                         10 -> context.startActivity(Intent(context, TestActivity2::class.java))
+                        11 -> context.startActivity(Intent(context, TestActivity3::class.java))
+                        12 -> context.startActivity(Intent(context, TestActivity4::class.java))
+                        13 -> context.startActivity(Intent(context, TestActivity5::class.java))
                     }
                 }
             )

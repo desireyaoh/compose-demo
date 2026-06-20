@@ -1,4 +1,4 @@
-package com.compose.demo
+package com.compose.demo.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.compose.demo.ui.theme.ComposedemoTheme
 import kotlinx.coroutines.flow.MutableStateFlow

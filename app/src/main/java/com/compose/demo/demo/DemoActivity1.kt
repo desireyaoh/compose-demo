@@ -1,4 +1,4 @@
-package com.compose.demo
+package com.compose.demo.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -33,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.compose.demo.ui.theme.ComposedemoTheme
 
@@ -177,7 +178,7 @@ fun LayoutSwitchDemo() {
  * @param onClick 点击回调，由调用方负责更新数据源
  */
 @Composable
-fun ListItemRow(text: String, height: androidx.compose.ui.unit.Dp, onClick: () -> Unit) {
+fun ListItemRow(text: String, height: Dp, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

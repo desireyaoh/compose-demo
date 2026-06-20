@@ -1,4 +1,4 @@
-package com.compose.demo
+package com.compose.demo.demo
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize

@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.FilledTonalIconToggleButton
 import androidx.compose.material3.HorizontalDivider
@@ -346,24 +347,37 @@ fun NativeAdCard(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.Top) {
                     Box(
                         modifier = Modifier
-                            .size(80.dp)
-                            .background(Color(0xFF757575))
+                            .size(100.dp)
+                            .background(Color(0xFFFF0000))
                     )
                     Spacer(modifier = Modifier.width(12.dp))
-                    Column {
-                        Text(
-                            text = stringResource(id = R.string.ad_title),
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
+                    Column(
+                        modifier = Modifier.height(100.dp),
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Column {
+                            Text(
+                                text = stringResource(id = R.string.ad_title),
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1
+                            )
+                            Text(
+                                text = "这是中间的内容",
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1
+                            )
+                        }
+
                         Text(
                             text = stringResource(id = R.string.ad_content),
                             fontSize = 14.sp,
-                            color = Color.Gray
+                            color = Color.Gray,
+                            maxLines = 1
                         )
                     }
                 }
@@ -383,6 +397,9 @@ fun NativeAdCard(modifier: Modifier = Modifier) {
                         color = Color.White
                     )
                 }
+
+                var checked by remember { mutableStateOf(true) }
+                Checkbox(checked, { checked = it })
             }
         }
     }

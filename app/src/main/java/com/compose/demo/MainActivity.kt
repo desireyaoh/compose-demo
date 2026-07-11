@@ -42,6 +42,7 @@ import com.compose.demo.demo.DemoActivity3
 import com.compose.demo.demo.DemoActivity4
 import com.compose.demo.demo.DemoActivity5
 import com.compose.demo.demo.DemoActivity6
+import com.compose.demo.demo.DemoActivity7
 import com.compose.demo.ui.theme.ComposedemoTheme
 import com.compose.demo.mine.TestActivity0
 import com.compose.demo.mine.TestActivity1
@@ -49,6 +50,7 @@ import com.compose.demo.mine.TestActivity2
 import com.compose.demo.mine.TestActivity3
 import com.compose.demo.mine.TestActivity4
 import com.compose.demo.mine.TestActivity5
+import com.compose.demo.mine.TestActivity6
 import com.compose.demo.mine.WeatherInfoActivity
 
 class MainActivity : ComponentActivity() {
@@ -133,6 +135,7 @@ fun DemoListScreen() {
         "跳转到 DemoActivity4 (ViewModel 结合)",
         "跳转到 DemoActivity5 (协程示例)",
         "跳转到 DemoActivity6 (Pager 示例)",
+        "跳转到 DemoActivity7 (副作用示例)",
         "跳转到 SettingsActivity",
         "跳转到 WeatherInfoActivity (天气详情)",
         "跳转到 TestActivity0",
@@ -141,6 +144,7 @@ fun DemoListScreen() {
         "跳转到 TestActivity3",
         "跳转到 TestActivity4",
         "跳转到 TestActivity5",
+        "跳转到 TestActivity6",
     )
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -155,14 +159,16 @@ fun DemoListScreen() {
                         3 -> context.startActivity(Intent(context, DemoActivity4::class.java))
                         4 -> context.startActivity(Intent(context, DemoActivity5::class.java))
                         5 -> context.startActivity(Intent(context, DemoActivity6::class.java))
-                        6 -> context.startActivity(Intent(context, SettingsActivity::class.java))
-                        7 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
-                        8 -> context.startActivity(Intent(context, TestActivity0::class.java))
-                        9 -> context.startActivity(Intent(context, TestActivity1::class.java))
-                        10 -> context.startActivity(Intent(context, TestActivity2::class.java))
-                        11 -> context.startActivity(Intent(context, TestActivity3::class.java))
-                        12 -> context.startActivity(Intent(context, TestActivity4::class.java))
-                        13 -> context.startActivity(Intent(context, TestActivity5::class.java))
+                        6 -> context.startActivity(Intent(context, DemoActivity7::class.java))
+                        7 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                        8 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
+                        9 -> context.startActivity(Intent(context, TestActivity0::class.java))
+                        10 -> context.startActivity(Intent(context, TestActivity1::class.java))
+                        11 -> context.startActivity(Intent(context, TestActivity2::class.java))
+                        12 -> context.startActivity(Intent(context, TestActivity3::class.java))
+                        13 -> context.startActivity(Intent(context, TestActivity4::class.java))
+                        14 -> context.startActivity(Intent(context, TestActivity5::class.java))
+                        15 -> context.startActivity(Intent(context, TestActivity6::class.java))
                     }
                 }
             )

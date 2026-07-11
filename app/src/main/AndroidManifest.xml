@@ -88,6 +88,17 @@
             android:label="@string/title_activity_test5"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".mine.TestActivity6"
+            android:exported="false"
+            android:label="@string/title_activity_test6"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".demo.DemoActivity7"
+            android:exported="false"
+            android:label="副作用示例" />
+
     </application>
 
 

@@ -87,4 +87,65 @@
     <string name="sh_s4_total_fmt">总计 %d 件</string>
     <string name="sh_s4_increment">增加数量</string>
     <string name="sh_s4_decrement">减少数量</string>
+
+    <!-- Compose 协程演示 -->
+    <string name="title_activity_test6">Compose 协程演示</string>
+    <!-- Section 1: LaunchedEffect -->
+    <string name="co_s1_title">1. LaunchedEffect — 倒计时</string>
+    <string name="co_s1_hint">LaunchedEffect 以 key 为触发器：key 变化时取消旧协程并重新启动新协程</string>
+    <string name="co_s1_start">开始倒计时</string>
+    <string name="co_s1_reset">重置</string>
+    <string name="co_s1_countdown_fmt">剩余：%d 秒</string>
+    <string name="co_s1_finished">倒计时结束！</string>
+    <!-- Section 2: rememberCoroutineScope -->
+    <string name="co_s2_title">2. rememberCoroutineScope — 手动启动协程</string>
+    <string name="co_s2_hint">rememberCoroutineScope 在事件处理器（非 Composable 上下文）中启动协程</string>
+    <string name="co_s2_input_label">用户名</string>
+    <string name="co_s2_submit">提交</string>
+    <string name="co_s2_submitting">提交中…</string>
+    <string name="co_s2_success">提交成功！</string>
+    <string name="co_s2_idle">等待提交</string>
+    <!-- Section 3: Flow + collectAsState -->
+    <string name="co_s3_title">3. Flow + collectAsState — 实时数据流</string>
+    <string name="co_s3_hint">cold Flow 每秒发射一次，collectAsState 自动将新值转为 State 刷新 UI</string>
+    <string name="co_s3_tick_fmt">已运行：%d 秒</string>
+    <!-- Section 4: ViewModel + StateFlow -->
+    <string name="co_s4_title">4. ViewModel + StateFlow — 模拟网络请求</string>
+    <string name="co_s4_load_btn">加载新闻</string>
+    <string name="co_s4_loading">加载中…</string>
+    <string name="co_s4_news_title">最新资讯</string>
+    <string name="co_s4_refresh">刷新</string>
+    <string name="co_s4_retry">重试</string>
+
+    <!-- Compose 副作用演示 -->
+    <string name="se_screen_title">Compose 副作用演示</string>
+    <!-- Section 1: DisposableEffect -->
+    <string name="se_s1_title">1. DisposableEffect — 可释放的副作用</string>
+    <string name="se_s1_hint">DisposableEffect 当 key 变化或 Composable 离开组合树时，在 onDispose 中执行清理（如注销监听器）</string>
+    <string name="se_s1_log_fmt">状态：%s</string>
+    <string name="se_s1_register">注册监听器</string>
+    <string name="se_s1_unregister">注销监听器</string>
+    <!-- Section 2: SideEffect -->
+    <string name="se_s2_title">2. SideEffect — 同步到非 Compose 系统</string>
+    <string name="se_s2_hint">SideEffect 在每次成功重组后执行，适合将 Compose State 同步给外部非 Compose 对象（如第三方 SDK）</string>
+    <string name="se_s2_synced_fmt">外部计数器同步值：%d</string>
+    <string name="se_s2_click_fmt">点击次数（触发重组）：%d</string>
+    <string name="se_s2_trigger">点击触发重组</string>
+    <!-- Section 3: produceState -->
+    <string name="se_s3_title">3. produceState — 外部数据源 → State</string>
+    <string name="se_s3_hint">produceState 将回调 / 挂起函数等非 Compose 数据源封装为 State，key 变化时重新执行 producer</string>
+    <string name="se_s3_loading">加载中…</string>
+    <string name="se_s3_user_fmt">当前用户：%s</string>
+    <string name="se_s3_next_user">切换用户</string>
+    <!-- Section 4: derivedStateOf -->
+    <string name="se_s4_title">4. derivedStateOf — 派生状态</string>
+    <string name="se_s4_hint">derivedStateOf 只在派生结果真正变化时才触发依赖它的重组，避免无效重组</string>
+    <string name="se_s4_search_label">搜索水果</string>
+    <string name="se_s4_result_fmt">结果（%1$d 条）：%2$s</string>
+    <!-- Section 5: snapshotFlow -->
+    <string name="se_s5_title">5. snapshotFlow — State → Flow</string>
+    <string name="se_s5_hint">snapshotFlow 将 Compose State 转为 Flow，可叠加 distinctUntilChanged 等操作符实现防抖</string>
+    <string name="se_s5_initial">滑动 Slider 查看防抖效果</string>
+    <string name="se_s5_debounced_fmt">防抖值：%.2f</string>
+    <string name="se_s5_realtime_fmt">实时值：%.2f</string>
 </resources>

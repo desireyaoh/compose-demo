@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose.demo.ui.theme.ComposedemoTheme
@@ -200,5 +201,31 @@ fun VerticalPagerDemo() {
                 textAlign = TextAlign.Center
             )
         }
+    }
+}
+
+// --- 预览代码 ---
+
+@Preview(showBackground = true, name = "全屏预览")
+@Composable
+fun PagerDemoScreenPreview() {
+    ComposedemoTheme {
+        PagerDemoScreen()
+    }
+}
+
+@Preview(showBackground = true, name = "横向 Pager 预览")
+@Composable
+fun HorizontalPagerDemoPreview() {
+    ComposedemoTheme {
+        HorizontalPagerDemo()
+    }
+}
+
+@Preview(showBackground = true, name = "纵向 Pager 预览")
+@Composable
+fun VerticalPagerDemoPreview() {
+    ComposedemoTheme {
+        VerticalPagerDemo()
     }
 }

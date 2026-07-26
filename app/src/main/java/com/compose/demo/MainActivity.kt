@@ -1,24 +1,18 @@
 package com.compose.demo
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.Contacts
 import androidx.compose.material.icons.automirrored.outlined.ListAlt
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -33,25 +27,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import com.compose.demo.demo.ContactsScreen
 import com.compose.demo.demo.ConversationScreen
-import com.compose.demo.demo.DemoActivity1
-import com.compose.demo.demo.DemoActivity2
-import com.compose.demo.demo.DemoActivity3
-import com.compose.demo.demo.DemoActivity4
-import com.compose.demo.demo.DemoActivity5
-import com.compose.demo.demo.DemoActivity6
-import com.compose.demo.demo.DemoActivity7
 import com.compose.demo.ui.theme.ComposedemoTheme
-import com.compose.demo.mine.TestActivity0
-import com.compose.demo.mine.TestActivity1
-import com.compose.demo.mine.TestActivity2
-import com.compose.demo.mine.TestActivity3
-import com.compose.demo.mine.TestActivity4
-import com.compose.demo.mine.TestActivity5
-import com.compose.demo.mine.TestActivity6
-import com.compose.demo.mine.WeatherInfoActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +88,7 @@ fun MainScreen() {
                 .padding(innerPadding)
         ) {
             when (selectedIndex) {
-                0 -> DemoListScreen()
+                0 -> DemoActivityListScreen()
                 1 -> ConversationScreen()
                 2 -> ContactsScreen()
                 else -> Box(
@@ -120,59 +98,6 @@ fun MainScreen() {
                     Text(text = tabs[selectedIndex].title)
                 }
             }
-        }
-    }
-}
-
-
-@Composable
-fun DemoListScreen() {
-    val context = LocalContext.current
-    val items = listOf(
-        "跳转到 DemoActivity1 (列表切换)",
-        "跳转到 DemoActivity2 (基础布局与组件)",
-        "跳转到 DemoActivity3 (状态管理详解)",
-        "跳转到 DemoActivity4 (ViewModel 结合)",
-        "跳转到 DemoActivity5 (协程示例)",
-        "跳转到 DemoActivity6 (Pager 示例)",
-        "跳转到 DemoActivity7 (副作用示例)",
-        "跳转到 SettingsActivity",
-        "跳转到 WeatherInfoActivity (天气详情)",
-        "跳转到 TestActivity0",
-        "跳转到 TestActivity1",
-        "跳转到 TestActivity2",
-        "跳转到 TestActivity3",
-        "跳转到 TestActivity4",
-        "跳转到 TestActivity5",
-        "跳转到 TestActivity6",
-    )
-
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        itemsIndexed(items) { index, item ->
-            ListItem(
-                headlineContent = { Text(text = item) },
-                modifier = Modifier.clickable {
-                    when (index) {
-                        0 -> context.startActivity(Intent(context, DemoActivity1::class.java))
-                        1 -> context.startActivity(Intent(context, DemoActivity2::class.java))
-                        2 -> context.startActivity(Intent(context, DemoActivity3::class.java))
-                        3 -> context.startActivity(Intent(context, DemoActivity4::class.java))
-                        4 -> context.startActivity(Intent(context, DemoActivity5::class.java))
-                        5 -> context.startActivity(Intent(context, DemoActivity6::class.java))
-                        6 -> context.startActivity(Intent(context, DemoActivity7::class.java))
-                        7 -> context.startActivity(Intent(context, SettingsActivity::class.java))
-                        8 -> context.startActivity(Intent(context, WeatherInfoActivity::class.java))
-                        9 -> context.startActivity(Intent(context, TestActivity0::class.java))
-                        10 -> context.startActivity(Intent(context, TestActivity1::class.java))
-                        11 -> context.startActivity(Intent(context, TestActivity2::class.java))
-                        12 -> context.startActivity(Intent(context, TestActivity3::class.java))
-                        13 -> context.startActivity(Intent(context, TestActivity4::class.java))
-                        14 -> context.startActivity(Intent(context, TestActivity5::class.java))
-                        15 -> context.startActivity(Intent(context, TestActivity6::class.java))
-                    }
-                }
-            )
-            HorizontalDivider(color = Color.LightGray.copy(alpha = 0.5f))
         }
     }
 }

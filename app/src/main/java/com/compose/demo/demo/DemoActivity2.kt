@@ -45,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.compose.demo.ui.theme.ComposedemoTheme
 
@@ -225,4 +226,18 @@ private fun SectionTitle(title: String) {
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(bottom = 12.dp)
     )
+}
+
+/** 整页预览：与 Activity 中一致，包裹主题和 Surface，内容可滚动 */
+@Preview(showBackground = true, showSystemUi = true, name = "布局与组件示例整页")
+@Composable
+private fun LayoutsAndComponentsDemoPreview() {
+    ComposedemoTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            LayoutsAndComponentsDemo()
+        }
+    }
 }

@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".TestActivityListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_test_activity_list" />
+        <activity
             android:name=".demo.DemoActivity1"
             android:exported="false"
             android:label="@string/title_activity_demo1"

@@ -33,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.compose.demo.ui.theme.ComposedemoTheme
@@ -192,5 +193,28 @@ fun ListItemRow(text: String, height: Dp, onClick: () -> Unit) {
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.bodyMedium
         )
+    }
+}
+
+/** 整页预览：与 Activity 中一致，包裹主题和 Surface，默认展示列表模式 */
+@Preview(showBackground = true, showSystemUi = true, name = "布局切换示例整页")
+@Composable
+private fun LayoutSwitchDemoPreview() {
+    ComposedemoTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            LayoutSwitchDemo()
+        }
+    }
+}
+
+/** 列表条目卡片单独预览 */
+@Preview(showBackground = true, name = "列表条目卡片")
+@Composable
+private fun ListItemRowPreview() {
+    ComposedemoTheme {
+        ListItemRow(text = "条目 0", height = 80.dp) {}
     }
 }

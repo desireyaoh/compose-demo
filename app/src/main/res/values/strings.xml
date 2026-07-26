@@ -116,6 +116,14 @@
     <string name="co_s4_news_title">最新资讯</string>
     <string name="co_s4_refresh">刷新</string>
     <string name="co_s4_retry">重试</string>
+    <!-- Section 4-2: ViewModel + StateFlow（普通类 + 属性组合对照版） -->
+    <string name="co_s4b_title">4-2. ViewModel + StateFlow — 普通类 + 属性组合的写法</string>
+    <string name="co_s4b_hint">用一个类的多个属性组合表达状态，优先级靠 if/else 手动约定，编译器不做穷尽检查</string>
+    <!-- Section 5: 重组作用域 -->
+    <string name="co_s5_title">5. 重组作用域 — 状态只在读取它的函数内触发重组</string>
+    <string name="co_s5_hint">状态在哪个函数内读取，重组就只发生在哪个函数，不会波及父级或兄弟 Composable</string>
+    <string name="co_s5_count_fmt">卡片 %1$s 计数：%2$d</string>
+    <string name="co_s5_increment_fmt">卡片 %1$s 计数 +1</string>
 
     <!-- Compose 副作用演示 -->
     <string name="se_screen_title">Compose 副作用演示</string>
@@ -128,7 +136,7 @@
     <!-- Section 2: SideEffect -->
     <string name="se_s2_title">2. SideEffect — 同步到非 Compose 系统</string>
     <string name="se_s2_hint">SideEffect 在每次成功重组后执行，适合将 Compose State 同步给外部非 Compose 对象（如第三方 SDK）</string>
-    <string name="se_s2_synced_fmt">外部计数器同步值：%d</string>
+    <string name="se_s2_logcat_tip">外部计数器每次成功重组后 +1，数值变化见 Logcat（TAG=测试）</string>
     <string name="se_s2_click_fmt">点击次数（触发重组）：%d</string>
     <string name="se_s2_trigger">点击触发重组</string>
     <!-- Section 3: produceState -->
@@ -137,6 +145,11 @@
     <string name="se_s3_loading">加载中…</string>
     <string name="se_s3_user_fmt">当前用户：%s</string>
     <string name="se_s3_next_user">切换用户</string>
+    <string name="se_s3_await_dispose_hint">awaitDispose 演示：回调式外部 API（无挂起函数），关闭 / 离开组合树时同步注销</string>
+    <string name="se_s3_ticker_fmt">回调数据源推送值：%d</string>
+    <string name="se_s3_ticker_idle">未注册（点击下方按钮注册）</string>
+    <string name="se_s3_attach_ticker">注册回调数据源</string>
+    <string name="se_s3_detach_ticker">注销回调数据源</string>
     <!-- Section 4: derivedStateOf -->
     <string name="se_s4_title">4. derivedStateOf — 派生状态</string>
     <string name="se_s4_hint">derivedStateOf 只在派生结果真正变化时才触发依赖它的重组，避免无效重组</string>
@@ -148,4 +161,44 @@
     <string name="se_s5_initial">滑动 Slider 查看防抖效果</string>
     <string name="se_s5_debounced_fmt">防抖值：%.2f</string>
     <string name="se_s5_realtime_fmt">实时值：%.2f</string>
+    <!-- Section 6: LaunchedEffect vs DisposableEffect -->
+    <string name="se_s6_title">6. LaunchedEffect vs DisposableEffect — 差异对比</string>
+    <string name="se_s6_hint">两者共用同一个 key：切换 key 或卸载探针时，观察各自的收尾方式有何不同</string>
+    <string name="se_s6_session_fmt">当前 key（sessionId）：%d</string>
+    <string name="se_s6_switch_key">切换 key</string>
+    <string name="se_s6_attach">挂载探针</string>
+    <string name="se_s6_detach">卸载探针</string>
+    <string name="se_s6_clear_log">清空日志</string>
+    <string name="se_s6_detached">探针已卸载（不在组合树中）</string>
+    <string name="se_s6_log_title">事件日志（仅显示最近 10 条）：</string>
+    <string name="se_s6_log_empty">暂无事件</string>
+    <string name="se_s6_log_line_fmt">%1$d. %2$s</string>
+    <string name="se_s6_le_start_fmt">[LaunchedEffect] 协程启动，key=%d，开始 3 秒挂起任务</string>
+    <string name="se_s6_le_done_fmt">[LaunchedEffect] 挂起任务正常完成，key=%d</string>
+    <string name="se_s6_le_cancel_fmt">[LaunchedEffect] 协程被取消，key=%d（无 onDispose，靠 finally 收尾）</string>
+    <string name="se_s6_de_register_fmt">[DisposableEffect] 代码块执行，key=%d（同步，不能挂起）</string>
+    <string name="se_s6_de_dispose_fmt">[DisposableEffect] onDispose 执行，key=%d（同步清理）</string>
+    <string name="se_s6_summary">对比要点：\n① 执行体：LaunchedEffect 是协程，可 delay / 调用挂起函数；DisposableEffect 是普通代码块，不能挂起\n② 收尾：LaunchedEffect 的收尾是「取消协程」，只能靠 try/finally；DisposableEffect 必须返回 onDispose\n③ 时机：onDispose 在离开组合时同步执行；协程取消是异步的，取消日志往往晚于 onDispose 出现\n④ 选型：异步 / 延时任务用 LaunchedEffect；成对的注册-注销资源用 DisposableEffect</string>
+
+    <!-- DemoActivity 系列跳转列表（内嵌在“示例” Tab 中） -->
+    <string name="demo_list_item_1">跳转到 DemoActivity1 (列表切换)</string>
+    <string name="demo_list_item_2">跳转到 DemoActivity2 (基础布局与组件)</string>
+    <string name="demo_list_item_3">跳转到 DemoActivity3 (状态管理详解)</string>
+    <string name="demo_list_item_4">跳转到 DemoActivity4 (ViewModel 结合)</string>
+    <string name="demo_list_item_5">跳转到 DemoActivity5 (协程示例)</string>
+    <string name="demo_list_item_6">跳转到 DemoActivity6 (Pager 示例)</string>
+    <string name="demo_list_item_7">跳转到 DemoActivity7 (副作用示例)</string>
+    <string name="demo_list_item_8">跳转到 TestActivity 示例（mine 目录）</string>
+
+    <!-- TestActivity 系列跳转列表 -->
+    <string name="title_activity_test_activity_list">TestActivity 示例</string>
+    <string name="test_list_item_1">跳转到 WeatherInfoActivity (天气详情)</string>
+    <string name="test_list_item_2">跳转到 TestActivity0</string>
+    <string name="test_list_item_3">跳转到 TestActivity1</string>
+    <string name="test_list_item_4">跳转到 TestActivity2</string>
+    <string name="test_list_item_5">跳转到 TestActivity3</string>
+    <string name="test_list_item_6">跳转到 TestActivity4</string>
+    <string name="test_list_item_7">跳转到 TestActivity5</string>
+    <string name="test_list_item_8">跳转到 TestActivity6</string>
+    <string name="test_list_item_9">跳转到 SettingsActivity</string>
 </resources>

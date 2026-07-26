@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
+/**
+ * 示例 ViewModel，通过 [StateFlow] 管理页面状态。
+ * 包含计数器（[count]）和输入框文本（[userInput]）两组状态，
+ * 生命周期长于 Activity，配置更改（如旋转屏幕）时数据不会丢失。
+ */
 // 1. 定义 ViewModel
 // ViewModel 负责管理数据和业务逻辑，其生命周期长于 Activity，即使配置更改（如旋转屏幕）数据也不会丢失
 class MyViewModel : ViewModel() {
@@ -56,6 +62,11 @@ class MyViewModel : ViewModel() {
     }
 }
 
+/**
+ * Compose + ViewModel 示例页面入口 Activity。
+ * 演示如何在 Compose 中通过 `viewModel()` 获取 [MyViewModel]，
+ * 并用 `collectAsState` 将 [StateFlow] 转换为 Compose State 驱动 UI 更新。
+ */
 class DemoActivity4 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,5 +147,19 @@ fun ViewModelDemoScreen(viewModel: MyViewModel) {
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(16.dp)
         )
+    }
+}
+
+/** 整页预览：MyViewModel 无构造参数，可直接实例化用于预览 */
+@Preview(showBackground = true, showSystemUi = true, name = "ViewModel 示例整页")
+@Composable
+private fun ViewModelDemoScreenPreview() {
+    ComposedemoTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            ViewModelDemoScreen(MyViewModel())
+        }
     }
 }

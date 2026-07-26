@@ -29,12 +29,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose.demo.ui.theme.ComposedemoTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * 协程示例页面入口 Activity。
+ * 演示 Compose 中两种常用的协程使用方式：[LaunchedEffect] 和 [rememberCoroutineScope]。
+ */
 class DemoActivity5 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +57,11 @@ class DemoActivity5 : ComponentActivity() {
     }
 }
 
+/**
+ * 协程示例主页面，包含两个示例：
+ * 1. [TimerExample]：使用 [LaunchedEffect] 实现自动启动的倒计时
+ * 2. [ClickCoroutineExample]：使用 [rememberCoroutineScope] 在点击事件中手动启动协程
+ */
 @Composable
 fun CoroutineDemoScreen() {
     Column(
@@ -82,6 +92,10 @@ fun CoroutineDemoScreen() {
     }
 }
 
+/**
+ * 示例 1：LaunchedEffect 倒计时。
+ * 进入页面自动从 10 秒开始倒计时，点击按钮可暂停/继续，倒计时结束后可重置。
+ */
 @Composable
 fun TimerExample() {
     var timeLeft by remember { mutableIntStateOf(10) }
@@ -110,6 +124,10 @@ fun TimerExample() {
     }
 }
 
+/**
+ * 示例 2：rememberCoroutineScope 手动启动协程。
+ * 点击按钮后模拟 2 秒网络请求，期间显示加载动画，完成后弹出 Toast。
+ */
 @Composable
 fun ClickCoroutineExample() {
     val context = LocalContext.current
@@ -137,6 +155,10 @@ fun ClickCoroutineExample() {
     }
 }
 
+/**
+ * 示例区块的小标题，标题文字 + 下方间距。
+ * @param title 标题文本
+ */
 @Composable
 private fun CoroutineDemoSectionTitle(title: String) {
     Text(
@@ -145,4 +167,36 @@ private fun CoroutineDemoSectionTitle(title: String) {
         modifier = Modifier.fillMaxWidth()
     )
     Spacer(modifier = Modifier.height(8.dp))
+}
+
+/** 整页预览：与 Activity 中一致，包裹主题和 Surface */
+@Preview(showBackground = true, showSystemUi = true, name = "协程示例整页")
+@Composable
+private fun CoroutineDemoScreenPreview() {
+    ComposedemoTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            CoroutineDemoScreen()
+        }
+    }
+}
+
+/** 倒计时组件单独预览（预览中 LaunchedEffect 不会执行，仅显示初始状态） */
+@Preview(showBackground = true, name = "倒计时示例")
+@Composable
+private fun TimerExamplePreview() {
+    ComposedemoTheme {
+        TimerExample()
+    }
+}
+
+/** 点击协程组件单独预览 */
+@Preview(showBackground = true, name = "点击协程示例")
+@Composable
+private fun ClickCoroutineExamplePreview() {
+    ComposedemoTheme {
+        ClickCoroutineExample()
+    }
 }

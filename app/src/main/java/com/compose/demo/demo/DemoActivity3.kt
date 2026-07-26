@@ -29,10 +29,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose.demo.ui.theme.ComposedemoTheme
 
+/**
+ * Compose 状态管理示例页面入口 Activity。
+ * 演示 `mutableStateOf` / `mutableIntStateOf` 配合 `remember` 的四种典型用法：
+ * 数值状态、布尔状态、对象状态（data class）和字符串状态。
+ */
 class DemoActivity3 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,6 +138,11 @@ fun ToggleStyleExample() {
     }
 }
 
+/**
+ * 对象状态示例用的数据类。
+ * @property name 姓名
+ * @property age 年龄
+ */
 data class UserInfo(val name: String, val age: Int)
 
 @Composable
@@ -177,4 +188,54 @@ fun SectionHeader(title: String) {
         color = MaterialTheme.colorScheme.secondary,
         modifier = Modifier.padding(bottom = 8.dp)
     )
+}
+
+/** 整页预览：与 Activity 中一致，包裹主题和 Surface */
+@Preview(showBackground = true, showSystemUi = true, name = "状态示例整页")
+@Composable
+private fun StateUsageDemoPreview() {
+    ComposedemoTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            StateUsageDemo()
+        }
+    }
+}
+
+/** 计数器示例单独预览 */
+@Preview(showBackground = true, name = "计数器示例")
+@Composable
+private fun CounterExamplePreview() {
+    ComposedemoTheme {
+        CounterExample()
+    }
+}
+
+/** 布尔切换示例单独预览 */
+@Preview(showBackground = true, name = "布尔切换示例")
+@Composable
+private fun ToggleStyleExamplePreview() {
+    ComposedemoTheme {
+        ToggleStyleExample()
+    }
+}
+
+/** 对象状态示例单独预览 */
+@Preview(showBackground = true, name = "对象状态示例")
+@Composable
+private fun ObjectStateExamplePreview() {
+    ComposedemoTheme {
+        ObjectStateExample()
+    }
+}
+
+/** 字符串状态示例单独预览 */
+@Preview(showBackground = true, name = "字符串状态示例")
+@Composable
+private fun StringStateExamplePreview() {
+    ComposedemoTheme {
+        StringStateExample()
+    }
 }

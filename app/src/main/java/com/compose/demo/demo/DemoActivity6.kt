@@ -35,6 +35,14 @@ import androidx.compose.ui.unit.sp
 import com.compose.demo.ui.theme.ComposedemoTheme
 import kotlinx.coroutines.launch
 
+/**
+ * Compose Pager 组件演示页面。
+ *
+ * 集中展示 Compose Foundation Pager 的三种典型用法：
+ * 1. HorizontalPager 结合 TabRow 实现 Tab + 页面联动切换；
+ * 2. HorizontalPager 结合自定义圆点指示器；
+ * 3. VerticalPager 实现类似抖音的垂直翻页效果。
+ */
 class DemoActivity6 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +60,11 @@ class DemoActivity6 : ComponentActivity() {
     }
 }
 
+/**
+ * Pager 演示主界面，纵向排列展示三种 Pager 用法示例。
+ *
+ * 包含：Tab 联动的水平翻页、带圆点指示器的水平翻页、垂直翻页三个示例模块。
+ */
 @Composable
 fun PagerDemoScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -76,6 +89,12 @@ fun PagerDemoScreen() {
     }
 }
 
+/**
+ * HorizontalPager 结合 TabRow 示例：点击 Tab 或左右滑动页面，两者状态双向联动。
+ *
+ * 通过同一个 pagerState 同步 TabRow 选中项与 Pager 当前页，
+ * 点击 Tab 时在协程中调用 animateScrollToPage 平滑滚动到对应页面。
+ */
 @Composable
 fun HorizontalPagerWithTabs() {
     val titles = listOf("主页", "消息", "设置")
@@ -114,6 +133,11 @@ fun HorizontalPagerWithTabs() {
     }
 }
 
+/**
+ * HorizontalPager 结合自定义圆点指示器示例。
+ *
+ * Pager 下方绘制一排圆点，根据当前页切换圆点颜色（当前页深色、其余浅色）。
+ */
 @Composable
 fun PagerWithIndicator() {
     val pageCount = 5
@@ -150,6 +174,9 @@ fun PagerWithIndicator() {
     }
 }
 
+/**
+ * VerticalPager 示例：上下垂直翻页，类似短视频应用的滑动切换效果。
+ */
 @Composable
 fun VerticalPagerExample() {
     val pagerState = rememberPagerState(pageCount = { 3 })
@@ -172,6 +199,11 @@ fun VerticalPagerExample() {
     }
 }
 
+/**
+ * Pager 页面内的卡片内容组件，居中显示卡片序号文本。
+ * @param index 当前页索引，用于展示卡片编号
+ * @param color 卡片背景色
+ */
 @Composable
 private fun CardContent(index: Int, color: Color) {
     Box(
@@ -186,6 +218,10 @@ private fun CardContent(index: Int, color: Color) {
     }
 }
 
+/**
+ * 示例模块的分区标题组件，用于标识各 Pager 示例的序号和名称。
+ * @param title 标题文本
+ */
 @Composable
 private fun PagerSectionHeader(title: String) {
     Text(
